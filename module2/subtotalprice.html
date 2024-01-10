@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Subtotal</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price per Unit</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Product A</td>
+                <td><input type="number" class="quantity" min="1" value="1"></td>
+                <td><input type="number" class="unitPrice" min="0.01" step="0.01" value="1.00"></td>
+                <td><span class="subtotal"> $0.00</span></td>
+            </tr>
+            <tr>
+                <td>Product B</td>
+                <td><input type="number" class="quantity" min="1" value="1"></td>
+                <td><input type="number" class="unitPrice" min="0.01" step="0.01" value="1.00"></td>
+                <td><span class="subtotal"> $0.00</span></td>
+            </tr>
+          
+        </tbody>
+    </table>
+
+    <br>
+
+    <button onclick="calculateSubtotal()">Calculate Total</button>
+    
+    <br>
+
+    <p id="total">Total: $0.00</p>
+
+    <script>
+        function calculateSubtotal() {
+        
+            var rows = document.querySelectorAll('tbody tr');
+
+            var total = 0;
+
+   
+            rows.forEach(function(row) {
+               
+                var quantity = parseFloat(row.querySelector('.quantity').value);
+                var unitPrice = parseFloat(row.querySelector('.unitPrice').value);
+
+                
+                var subtotal = quantity * unitPrice;
+
+                row.querySelector('.subtotal').textContent = "$" + subtotal.toFixed(2);
+                total += subtotal;
+            });
+
+            document.getElementById("total").textContent = "Total: $" + total.toFixed(2);
+        }
+    </script>
+</body>
+</html>
+
